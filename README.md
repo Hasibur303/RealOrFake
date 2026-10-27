@@ -7,7 +7,7 @@ The repository currently contains a frontend only. **No machine-learning model i
 ## What is included
 
 - Responsive React, TypeScript, Vite, and Tailwind CSS interface
-- Home, product-check, research, and demo-result views
+- Home, product-check, research, demo-result, and company-workspace views
 - Drag-and-drop and file-picker upload paths
 - Local image previews with view labels, file details, removal, and replacement
 - JPEG, PNG, WebP, file-size, image-readability, and upload-count validation
@@ -15,6 +15,8 @@ The repository currently contains a frontend only. **No machine-learning model i
 - Typed request, response, and error contracts for a future inference service
 - Explicit loading, error, unavailable-service, ready, and completed-result states
 - Fixed fictional result fixtures for likely-genuine, suspicious, and insufficient-evidence layouts
+- Guided four-step company reference preparation flow for brands, manufacturers, authorized distributors, and research or regulatory organizations
+- Browser-memory-only company drafts with organization, market, package-version, image, rights-confirmation, review, and completion states
 - Unit tests for validation and response-state handling
 - GitHub Pages deployment workflow with a repository-aware base path
 

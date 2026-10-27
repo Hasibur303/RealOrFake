@@ -1,4 +1,4 @@
-import { ArrowRight, Camera, ScanText, ShieldCheck, Sparkles } from 'lucide-react'
+import { ArrowRight, Building2, Camera, ScanText, ShieldCheck, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { PackagingVisual } from '../components/PackagingVisual'
 import { productCategories } from '../config/research'
@@ -82,6 +82,14 @@ export function HomePage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="company-home-section">
+        <div className="container company-home-card">
+          <div className="company-home-icon"><Building2 aria-hidden="true" /></div>
+          <div><p className="eyebrow">For brands & manufacturers</p><h2>Help prepare reliable packaging references.</h2><p>Authorized organizations can organize company, product, market, version, and package-view information in a guided local workspace.</p></div>
+          <Link className="button button--light" to="/company">Explore company workspace <ArrowRight size={17} aria-hidden="true" /></Link>
         </div>
       </section>
 

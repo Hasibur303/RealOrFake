@@ -8,6 +8,7 @@ const navItems = [
   { to: '/check', label: 'Check a product' },
   { to: '/research', label: 'How it works' },
   { to: '/demo', label: 'Demo results' },
+  { to: '/company', label: 'For companies' },
 ]
 
 export function Layout() {
@@ -78,6 +79,7 @@ export function Layout() {
             <NavLink to="/check">Check a product</NavLink>
             <NavLink to="/research">Research approach</NavLink>
             <NavLink to="/demo">Demo results</NavLink>
+            <NavLink to="/company">For companies</NavLink>
           </div>
           <div>
             <p className="footer-heading">Important</p>
