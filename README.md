@@ -4,6 +4,8 @@ RealOrFake is the frontend prototype for the Final Year Design Project **“A Mu
 
 The repository currently contains a frontend only. **No machine-learning model is connected, and ordinary uploads never generate a simulated authenticity prediction.** Fixed fictional fixtures live in a separate “Explore demo results” area.
 
+**Live interface:** [hasibur303.github.io/RealOrFake](https://hasibur303.github.io/RealOrFake/)
+
 ## What is included
 
 - Responsive React, TypeScript, Vite, and Tailwind CSS interface
@@ -21,6 +23,55 @@ The repository currently contains a frontend only. **No machine-learning model i
 - Intentional not-found route instead of silently redirecting invalid URLs
 - Unit tests for validation and response-state handling
 - GitHub Pages deployment workflow with a repository-aware base path
+
+## Interface screenshots
+
+The report-ready JPG files are stored in [`docs/screenshots`](docs/screenshots). They show fictional sample content and the deliberately disconnected frontend state.
+
+| Home | Check a product |
+| --- | --- |
+| ![RealOrFake home page](docs/screenshots/01-home.jpg) | ![Product check interface](docs/screenshots/02-check-product.jpg) |
+
+<details>
+<summary>View the complete desktop and responsive screenshot set</summary>
+
+### Research approach
+
+![Research approach page](docs/screenshots/03-research.jpg)
+
+### Demo results
+
+![Fictional demo-results page](docs/screenshots/04-demo-results.jpg)
+
+### Company workspace
+
+![Company reference workspace](docs/screenshots/05-company-workspace.jpg)
+
+### Company portal overview
+
+![Company portal overview](docs/screenshots/06-company-portal-overview.jpg)
+
+### Company reference catalogue
+
+![Company portal reference catalogue](docs/screenshots/07-company-portal-references.jpg)
+
+### Company review guidance
+
+![Company review guidance](docs/screenshots/08-company-review-guidance.jpg)
+
+### Not-found state
+
+![Intentional not-found page](docs/screenshots/09-not-found.jpg)
+
+### Mobile home
+
+![Mobile home interface](docs/screenshots/10-mobile-home.jpg)
+
+### Mobile company portal
+
+![Mobile company portal](docs/screenshots/11-mobile-company-portal.jpg)
+
+</details>
 
 ## Local development
 
