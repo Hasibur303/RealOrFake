@@ -14,11 +14,13 @@ import {
   Images,
   Info,
   LockKeyhole,
+  LayoutDashboard,
   PackageCheck,
   Plus,
   ShieldCheck,
   Trash2,
 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { productCategories } from '../config/research'
 import type { CompanyProfile, ProductReferenceDraft } from '../types/company'
 import { formatBytes, getMaxFileSizeBytes, MAX_IMAGE_COUNT, validateFiles, verifyImageReadable } from '../utils/fileValidation'
@@ -156,7 +158,7 @@ export function CompanyPage() {
             <p>RealOrFake’s company workspace is designed to help authorized organizations organize product and packaging information for a future reviewed reference library.</p>
             <div className="hero-actions">
               <a className="button" href="#company-workspace">Prepare a reference <ArrowRight size={18} aria-hidden="true" /></a>
-              <a className="text-link" href="#company-process">See the process</a>
+              <Link className="text-link" to="/company/portal"><LayoutDashboard size={16} aria-hidden="true" /> View sample portal</Link>
             </div>
             <div className="company-trust-row">
               <span><LockKeyhole size={15} aria-hidden="true" /> Local draft only</span>

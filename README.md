@@ -17,6 +17,8 @@ The repository currently contains a frontend only. **No machine-learning model i
 - Fixed fictional result fixtures for likely-genuine, suspicious, and insufficient-evidence layouts
 - Guided four-step company reference preparation flow for brands, manufacturers, authorized distributors, and research or regulatory organizations
 - Browser-memory-only company drafts with organization, market, package-version, image, rights-confirmation, review, and completion states
+- Functional sample company portal with overview, searchable reference catalogue, record details, preparation statuses, review guidance, filter and empty states
+- Intentional not-found route instead of silently redirecting invalid URLs
 - Unit tests for validation and response-state handling
 - GitHub Pages deployment workflow with a repository-aware base path
 
