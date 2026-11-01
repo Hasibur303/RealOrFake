@@ -10,3 +10,10 @@ Thumbs.db
 .idea/
 .vscode/
 *.tsbuildinfo
+
+# Model weights belong in private backend storage, not the public frontend repo.
+*.pth
+*.pt
+*.ckpt
+models/
+backend/models/

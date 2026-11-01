@@ -4,6 +4,11 @@ RealOrFake is the frontend prototype for the Final Year Design Project **“A Mu
 
 The repository currently contains a frontend only. **No machine-learning model is connected, and ordinary uploads never generate a simulated authenticity prediction.** Fixed fictional fixtures live in a separate “Explore demo results” area.
 
+The shared PyTorch checkpoint has been inspected safely and its verified tensor
+structure is documented in [`MODEL_INTEGRATION.md`](MODEL_INTEGRATION.md). A
+training notebook or source file is still required to recover preprocessing,
+the additional fusion feature, and label semantics before inference is enabled.
+
 **Live interface:** [hasibur303.github.io/RealOrFake](https://hasibur303.github.io/RealOrFake/)
 
 ## What is included
