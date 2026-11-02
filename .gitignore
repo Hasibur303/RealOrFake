@@ -17,3 +17,9 @@ Thumbs.db
 *.ckpt
 models/
 backend/models/
+
+# Python backend development files.
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/

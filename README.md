@@ -4,10 +4,11 @@ RealOrFake is the frontend prototype for the Final Year Design Project **“A Mu
 
 The repository currently contains a frontend only. **No machine-learning model is connected, and ordinary uploads never generate a simulated authenticity prediction.** Fixed fictional fixtures live in a separate “Explore demo results” area.
 
-The shared PyTorch checkpoint has been inspected safely and its verified tensor
-structure is documented in [`MODEL_INTEGRATION.md`](MODEL_INTEGRATION.md). A
-training notebook or source file is still required to recover preprocessing,
-the additional fusion feature, and label semantics before inference is enabled.
+The shared PyTorch checkpoint and Colab training notebook have been reconciled.
+Their verified architecture and inference contract are documented in
+[`MODEL_INTEGRATION.md`](MODEL_INTEGRATION.md), and the deployable Python service
+lives in [`backend/`](backend/README.md). The public static site remains
+disconnected until a backend URL is deployed and configured.
 
 **Live interface:** [hasibur303.github.io/RealOrFake](https://hasibur303.github.io/RealOrFake/)
 
@@ -28,6 +29,8 @@ the additional fusion feature, and label semantics before inference is enabled.
 - Intentional not-found route instead of silently redirecting invalid URLs
 - Unit tests for validation and response-state handling
 - GitHub Pages deployment workflow with a repository-aware base path
+- FastAPI inference service implementing the notebook's ResNet-50, EasyOCR,
+  MiniLM, cosine-similarity, and binary fusion pipeline
 
 ## Interface screenshots
 
@@ -112,6 +115,10 @@ cp .env.example .env.local
 | `VITE_API_BASE_URL` | Public base URL of the future inference API. Leave empty to keep the model disconnected. |
 | `VITE_MAX_FILE_SIZE_MB` | Maximum size of each selected image. Defaults to `8`. |
 | `VITE_BASE_PATH` | Vite asset base. The Pages workflow sets this automatically. |
+
+For GitHub Pages, set the repository Actions variable `VITE_API_BASE_URL` to the
+deployed HTTPS API origin and rerun the Pages workflow. Do not put model weights
+or server secrets in a `VITE_` variable.
 
 Do not place secrets in any `VITE_` variable. Vite exposes those values to every visitor’s browser.
 

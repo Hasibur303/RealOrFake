@@ -1,5 +1,7 @@
 import {
   AnalysisServiceError,
+  type AnalysisErrorCode,
+  type AnalysisErrorPayload,
   type AnalysisRequest,
   type AnalysisResponse,
   type ScreeningOutcome,
@@ -7,6 +9,26 @@ import {
 
 const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(/\/$/, '')
 const REQUEST_TIMEOUT_MS = 45_000
+const errorCodes: AnalysisErrorCode[] = [
+  'SERVICE_UNAVAILABLE',
+  'TIMEOUT',
+  'REJECTED_FILE',
+  'UNSUPPORTED_PRODUCT',
+  'INCOMPLETE_RESPONSE',
+  'NETWORK_ERROR',
+]
+
+function isAnalysisErrorPayload(value: unknown): value is AnalysisErrorPayload {
+  if (!value || typeof value !== 'object') return false
+  const candidate = value as Partial<AnalysisErrorPayload>
+  return Boolean(
+    candidate.code &&
+      errorCodes.includes(candidate.code) &&
+      candidate.message &&
+      typeof candidate.retryable === 'boolean' &&
+      (candidate.details === undefined || Array.isArray(candidate.details)),
+  )
+}
 
 export function isAnalysisResponse(value: unknown): value is AnalysisResponse {
   if (!value || typeof value !== 'object') return false
@@ -65,10 +87,12 @@ export async function requestAnalysis(request: AnalysisRequest): Promise<Analysi
     })
 
     if (!response.ok) {
-      const code = response.status === 422 ? 'REJECTED_FILE' : 'SERVICE_UNAVAILABLE'
+      const payload: unknown = await response.json().catch(() => null)
+      if (isAnalysisErrorPayload(payload)) throw new AnalysisServiceError(payload)
+      const code = response.status === 422 || response.status === 413 ? 'REJECTED_FILE' : 'SERVICE_UNAVAILABLE'
       throw new AnalysisServiceError({
         code,
-        message: response.status === 422 ? 'The service rejected one or more inputs.' : 'The analysis service is unavailable.',
+        message: code === 'REJECTED_FILE' ? 'The service rejected one or more inputs.' : 'The analysis service is unavailable.',
         retryable: response.status >= 500,
       })
     }

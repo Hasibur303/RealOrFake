@@ -179,8 +179,11 @@ export function CheckPage() {
             <p>Add one front image and up to three supporting views. The browser validates your files locally before any future model request.</p>
           </div>
           <div className="model-status-card">
-            <span className="status-dot status-dot--amber" aria-hidden="true" />
-            <div><strong>Model not connected</strong><p>Uploads will not produce a real or simulated prediction.</p></div>
+            <span className={`status-dot ${service.configured ? '' : 'status-dot--amber'}`} aria-hidden="true" />
+            <div>
+              <strong>{service.configured ? 'Model service configured' : 'Model not connected'}</strong>
+              <p>{service.configured ? 'Prepared images can be sent to the research inference service.' : 'Uploads will not produce a real or simulated prediction.'}</p>
+            </div>
           </div>
         </div>
       </section>
@@ -292,8 +295,10 @@ export function CheckPage() {
             </div>
             <div className="aside-card aside-card--privacy">
               <LockKeyhole aria-hidden="true" />
-              <h2>Your photos stay local</h2>
-              <p>Preview images remain in browser memory. Temporary preview URLs are released when you replace, remove, or leave this session.</p>
+              <h2>{service.configured ? 'Photos are sent only when requested' : 'Your photos stay local'}</h2>
+              <p>{service.configured
+                ? 'Previews remain local until you request analysis. The configured service then receives the prepared images and product details.'
+                : 'Preview images remain in browser memory. Temporary preview URLs are released when you replace, remove, or leave this session.'}</p>
             </div>
             <a className="aside-demo-link" href="#/demo"><span>Want to see the future result layout?</span><strong>Explore fictional demos →</strong></a>
           </aside>

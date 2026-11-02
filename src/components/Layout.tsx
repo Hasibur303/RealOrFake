@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { BrandMark } from './BrandMark'
+import { getServiceAvailability } from '../services/analysisService'
 
 const navItems = [
   { to: '/', label: 'Home' },
@@ -14,6 +15,7 @@ const navItems = [
 export function Layout() {
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
+  const service = getServiceAvailability()
 
   useEffect(() => {
     setMenuOpen(false)
@@ -26,7 +28,7 @@ export function Layout() {
       <div className="research-ribbon" role="status">
         <span className="status-dot" aria-hidden="true" />
         <strong>Research prototype</strong>
-        <span>Model not connected</span>
+        <span>{service.configured ? 'Model service configured' : 'Model not connected'}</span>
       </div>
 
       <header className="site-header">
@@ -88,7 +90,7 @@ export function Layout() {
         </div>
         <div className="container footer-bottom">
           <span>RealOrFake research interface</span>
-          <span>Frontend only · No photos are transmitted</span>
+          <span>{service.configured ? 'Connected screening · Review limitations before use' : 'Frontend only · No photos are transmitted'}</span>
         </div>
       </footer>
     </div>

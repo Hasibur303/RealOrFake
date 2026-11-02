@@ -39,21 +39,25 @@ The parameter names and shapes establish the following structure:
   - Linear `128 -> 1`
 - Output: one binary logit.
 
-## Required training contract
+## Verified training contract
 
-A state dict stores learned tensors, not the complete inference recipe. The
-following items must come from the training notebook or source before the model
-can be connected without inventing behavior:
+The shared `team_novatrix.ipynb` notebook supplies the previously missing
+inference recipe:
 
-1. Exact Python model class and `forward` method.
-2. Image resize/crop, color mode, tensor conversion, and normalization values.
-3. Exact Sentence-Transformers model identifier, tokenizer settings, maximum
-   text length, pooling, and normalization behavior.
-4. Definition and scaling of the extra scalar in the 2,433-feature fusion input.
-5. How EasyOCR output is cleaned, ordered, joined, and paired with reference text.
-6. Binary label map (`0` and `1`), sigmoid threshold, and any calibrated thresholds.
-7. Reference-text source and the rule used to select a product reference.
-8. At least one known input with its expected output for an end-to-end smoke test.
+1. RGB images are resized directly to 224×224, converted to tensors, and
+   normalized with ImageNet mean `[0.485, 0.456, 0.406]` and standard deviation
+   `[0.229, 0.224, 0.225]`.
+2. EasyOCR runs in English with `detail=0` and `paragraph=True`; images larger
+   than 1,024 px on either side are proportionally downscaled first.
+3. Text uses `all-MiniLM-L6-v2` without normalized embeddings.
+4. The extra scalar is cosine similarity between the extracted OCR text and the
+   notebook-selected authentic reference text.
+5. The reference is selected by a case-insensitive brand substring with a
+   default-cosmetic fallback.
+6. Label `0` is Original, label `1` is Fake, and inference uses sigmoid with a
+   threshold of 0.5.
+7. The checkpoint evaluates one image per example; it was not trained to average
+   multiple package views.
 
 ## Deployment boundary
 
@@ -72,6 +76,6 @@ The backend should:
 - avoid logging uploaded package images or extracted text by default; and
 - report model limitations rather than treating a score as certification.
 
-Once the training contract is supplied, the next implementation step is a
-FastAPI service matching the existing `/v1/analyze` frontend contract, followed
-by a known-sample verification before deployment.
+The implementation now lives in `backend/` as a FastAPI service matching the
+existing `/v1/analyze` frontend contract. A known labeled image remains desirable
+for a final end-to-end prediction check before public research use.
